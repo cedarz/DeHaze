@@ -4,9 +4,17 @@
 # DeHaze
 
 【1】[Single Image Haze Removal Using Dark Channel Prior](http://research.microsoft.com/en-us/um/people/jiansun/papers/Dehaze_CVPR2009.pdf)
-
 【2】[A Closed Form Solution to Natural Image Matting](http://www.wisdom.weizmann.ac.il/~levina/papers/Matting-Levin-Lischinski-Weiss-CVPR06.pdf)
 
+##完成情况
+
+实现起来真正的难点在soft matting，当然作者后来有一个文章是[Guided Image Fileter] (http://research.microsoft.com/en-us/um/people/kahe/eccv10/index.html) 可以用来解决该问题，好像更加高效。
+
+- 暗通道先验图 【done】
+- medium transmission矩阵 【done】
+- soft matting/软抠图 【to do/ hardest】
+- 评估大气光/atmospheric light 【done】
+- 去雾操作 【done】
 
 ##参考
 

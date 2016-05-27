@@ -16,6 +16,10 @@
 - 评估大气光/atmospheric light 【done】
 - 去雾操作 【done】
 
+
+##git->github
+
+- [如何使用Git上传项目代码到github](http://1ke.co/course/194)
 ##参考
 
 以下文章或多或少给我了验证想法和实现效果的参照，特此感谢

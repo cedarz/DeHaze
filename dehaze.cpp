@@ -77,7 +77,7 @@ void DeHaze::softMatting() {
 
 }
 
-//这个地方因为数据类型的原因浪费了不少时间
+//这个地方因为数据类型的原因浪费时间
 void DeHaze::recoverSceneRadiace(){
 	cout << "Startint to dehaze the image..." << endl;
 	for (int i = 0; i < src.rows; ++i) {

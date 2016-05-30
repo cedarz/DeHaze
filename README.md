@@ -13,7 +13,7 @@
 - 暗通道先验图 【done】
 - medium transmission矩阵 【done】
 - soft matting/软抠图 【】
-- soft matting 使用了guided image filter的实现，开源【done】
+- 代替soft matting 使用了guided image filter的实现，开源【done】
 - 评估大气光/atmospheric light 【done】
 - 去雾操作 【done】
 

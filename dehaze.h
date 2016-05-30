@@ -6,6 +6,7 @@
 #include <queue>
 #include <vector>
 //#include <opencv2/core/core.hpp>
+#include "guidedfilter.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ struct Region {
 class DeHaze {
 public:
 	static const int Radius = 7;
-	typedef enum { SRC, DARK, TRAN, DST, NUM } MatType;
+	typedef enum { SRC, DARK, TRAN, GTRAN, DST, NUM } MatType;
 private:
 	cv::Mat src;
 	cv::Mat dst;
@@ -33,12 +34,16 @@ private:
 	cv::Mat dark;
 	cv::Vec3b Alight;
 
+	cv::Mat guided;
+	cv::Mat gtran;
+
 public:
 	//DeHaze(string path);
 	void loadImage(const char * path);
 	void getDarkChannelPrior();
 	void getTransmission();
 	void softMatting(); // refine the transmission
+	void gFilter();
 	void recoverSceneRadiace();
 	void getAtmosphericLight(); //require the dark channel prior
 

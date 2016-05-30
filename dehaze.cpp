@@ -23,7 +23,7 @@ void DeHaze::loadImage(const char * path) {
 	//cv::waitKey(0);
 	tran.create(src.rows, src.cols, CV_32FC1);
 	dark.create(src.rows, src.cols, CV_8UC1);
-
+	gtran.create(src.rows, src.cols, CV_32FC1);
 	//cout << src << endl;
 
 }
@@ -68,23 +68,51 @@ void DeHaze::getTransmission() {
 			}
 			//cout << pixel << endl;
 			tran.at<float>(i, j) = 1.0 - 0.95 * pixel;
+			//cout << (1.0 - 0.95 * pixel) << " : " << tran.at<float>(i, j) << endl;
 		}
 	}
 	//showImage("tran", tran);
 }
 
 void DeHaze::softMatting() {
+	
+}
 
+void DeHaze::gFilter() {
+	//cv::cvtColor(src, guided, cv::COLOR_BGR2GRAY);
+	///
+	//cv::Mat res;
+	//res.create(tran.rows, tran.cols, CV_8UC1);
+	//for (int i = 0; i < tran.rows; ++i) {
+	//	for (int j = 0; j < tran.cols; ++j) {
+	//		uchar tmp = uchar((tran.at<float>(i, j) > 1.0 ? 1.0 : tran.at<float>(i, j)) *255 + 0.5);
+	//		//cout << "t : " << tran.at<float>(i, j) << " tmp : " << (int)tmp << endl;
+	//		res.at<uchar>(i, j) = tmp;
+	//	}
+	//}
+	//guidedFilter(res, src, 30, 0.001);
+	gtran = guidedFilter(src, tran, 30, 0.001);
+	//std::cout << gtran << std::endl;
+	//for (int i = 0; i < res.rows; ++i) {
+	//	for (int j = 0; j < res.cols; ++j) {
+	//		float tmp = float(gtran.at<uchar>(i, j)) / 255.0;
+	//		//cout << "t : " << tran.at<float>(i, j) << " tmp : " << (int)tmp << endl;
+	//		gtran.at<float>(i, j) = tmp;
+	//	}
+	//}
+	cv::imshow("gtran", gtran);
+	cv::waitKey(0);
 }
 
 //这个地方因为数据类型的原因浪费时间
 void DeHaze::recoverSceneRadiace(){
+	cout << "g channel : " << tran.channels() << endl;
 	cout << "Startint to dehaze the image..." << endl;
 	for (int i = 0; i < src.rows; ++i) {
 		for (int j = 0; j < src.cols; ++j) {
 			cv::Vec3b & dv = dst.at<cv::Vec3b>(i, j);
 			//cv::Vec3b & sv = src.at<cv::Vec3b>(i, j);
-			float t = std::max(tran.at<float>(i, j), 0.1f);
+			float t = std::max(gtran.at<float>(i, j), 0.1f);
 			cv::Vec3f tmp;// = (dv - Alight) / t;
 			for (int k = 0; k < 3; k++) {
 				tmp[k] = (float(dv[k]) - float(Alight[k])) / t;
@@ -146,6 +174,9 @@ void DeHaze::showImage(const char * wname, MatType mt) {
 		break;
 	case DeHaze::TRAN:
 		cv::imshow(wname, tran);
+		break;
+	case DeHaze::GTRAN:
+		cv::imshow(wname, gtran);
 		break;
 	}
 	if (cv::waitKey() == 27) {

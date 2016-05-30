@@ -4,14 +4,19 @@
 int main() {
 	DeHaze dhModel;
 	clock_t start = clock();
-	//dhModel.loadImage("../testSet/tiananmen.png");  
-	dhModel.loadImage("../testSet/tree.bmp");
-	//dhModel.showImage("src", DeHaze::SRC);
+	dhModel.loadImage("../testSet/tiananmen.png");  
+	//dhModel.loadImage("../testSet/tree.bmp");
+	//dhModel.loadImage("../testSet/city.png");
+	dhModel.showImage("src", DeHaze::SRC);
+
 	dhModel.getDarkChannelPrior();
-	//dhModel.showImage("dark", DeHaze::DARK);
+	//dhModel.("dark", DeHaze::DARK);
 	dhModel.getAtmosphericLight();
 	dhModel.getTransmission();
 	//dhModel.showImage("tran", DeHaze::TRAN);
+	dhModel.gFilter();
+	//dhModel.showImage("", DeHaze::GSRC);
+
 	dhModel.recoverSceneRadiace();
 	dhModel.showImage("dst", DeHaze::DST);
 	clock_t end = clock();

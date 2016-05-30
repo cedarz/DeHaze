@@ -4,6 +4,7 @@
 # DeHaze
 
 【1】[Single Image Haze Removal Using Dark Channel Prior](http://research.microsoft.com/en-us/um/people/jiansun/papers/Dehaze_CVPR2009.pdf)
+
 【2】[A Closed Form Solution to Natural Image Matting](http://www.wisdom.weizmann.ac.il/~levina/papers/Matting-Levin-Lischinski-Weiss-CVPR06.pdf)
 
 ##完成情况
@@ -20,6 +21,8 @@
 ##git->github
 
 - [如何使用Git上传项目代码到github](http://1ke.co/course/194)
+
+
 ##参考
 
 以下文章或多或少给我了验证想法和实现效果的参照，特此感谢

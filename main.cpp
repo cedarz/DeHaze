@@ -5,8 +5,8 @@ int main() {
 	DeHaze dhModel;
 	clock_t start = clock();
 	//dhModel.loadImage("../testSet/tiananmen.png");  
-	dhModel.loadImage("../testSet/tree.bmp");
-	//dhModel.loadImage("../testSet/city.png");
+	//dhModel.loadImage("../testSet/tree.bmp");
+	dhModel.loadImage("../testSet/bui.jpg");
 	//dhModel.loadImage("../testSet/toys.jpg");
 	dhModel.showImage("src", DeHaze::SRC);
 

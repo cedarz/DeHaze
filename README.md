@@ -32,6 +32,11 @@
  - [图像去雾成果](http://yueyue1105.blog.163.com/blog/static/43111768201011160563445/)
  - [《Single Image Haze Removal Using Dark Channel Prior》一文中图像去雾算法的原理、实现、效果（速度可实时）](http://www.cnblogs.com/Imageshop/p/3281703.html)
 
+##结果
+
+- 结果并不很理想，容易出现大量的五颜六色的色斑
+- 有一张测试图中的arilight大量候选点是255，可能有关系
+
 ##感谢
 
 - 代码中使用了[atilimcetin/guided-filter](https://github.com/atilimcetin/guided-filter)的`Guided Image Filter`的实现

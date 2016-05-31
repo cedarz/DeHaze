@@ -11,7 +11,8 @@ void DeHaze::loadImage(const char * path) {
 	src.release();
 	src = cv::imread(path);
 	assert(src.data);
-	cout << "Imgage successfully loaded form " << path << endl;
+	cout << "Imgage successfully loaded from " << path << endl;
+	cout << "image size : " << src.rows << " " << src.cols << " " << src.depth() << endl;
 	//cout << src.type() << endl;
 	//cout << src.channels() << endl;
 	tran.release();
@@ -91,7 +92,7 @@ void DeHaze::gFilter() {
 	//	}
 	//}
 	//guidedFilter(res, src, 30, 0.001);
-	gtran = guidedFilter(src, tran, 30, 0.001);
+	gtran = guidedFilter(src, tran, 20, 0.001);
 	//std::cout << gtran << std::endl;
 	//for (int i = 0; i < res.rows; ++i) {
 	//	for (int j = 0; j < res.cols; ++j) {
@@ -139,23 +140,40 @@ void DeHaze::getAtmosphericLight(){
 			}
 		}
 	}
-	//unsigned int A[3] = {};
-	uchar A[3] = {0, 0, 0};
+	unsigned int A[3] = {};
+	//uchar A[3] = {0, 0, 0};
+
+	///maximum
+	//while (!pq.empty()) {
+	//	Pixel tmp = pq.top();
+	//	//printf("%d (%d %d)\n", tmp.intensity, tmp.i, tmp.j);
+	//	cv::Vec3b vcb = src.at<cv::Vec3b>(tmp.i, tmp.j);
+	//	//A[0] += vcb[0], A[1] += vcb[1], A[2] += vcb[2];
+	//	A[0] = max(A[0], vcb[0]);
+	//	A[1] = max(A[1], vcb[1]);
+	//	A[2] = max(A[2], vcb[2]);
+	//	//printf("%d %d %d\n", vcb[0], vcb[1], vcb[2]);
+	//	pq.pop();
+	//}
+	////cout << int(A[0]) << " " << int(A[1]) << " " << int(A[2]) << endl;
+	//Alight[0] = A[0];// / num;
+	//Alight[1] = A[1];// / num;
+	//Alight[2] = A[2];// / num;
+
+	/// mean
 	while (!pq.empty()) {
 		Pixel tmp = pq.top();
 		//printf("%d (%d %d)\n", tmp.intensity, tmp.i, tmp.j);
 		cv::Vec3b vcb = src.at<cv::Vec3b>(tmp.i, tmp.j);
-		//A[0] += vcb[0], A[1] += vcb[1], A[1] += vcb[2];
-		A[0] = max(A[0], vcb[0]);
-		A[1] = max(A[1], vcb[1]);
-		A[2] = max(A[2], vcb[2]);
-		//printf("%d %d %d\n", vcb[0], vcb[1], vcb[2]);
+		A[0] += vcb[0], A[1] += vcb[1], A[2] += vcb[2];
+		printf("%d %d %d\n", vcb[0], vcb[1], vcb[2]);
 		pq.pop();
 	}
 	cout << int(A[0]) << " " << int(A[1]) << " " << int(A[2]) << endl;
-	Alight[0] = A[0];// / num;
-	Alight[1] = A[1];// / num;
-	Alight[2] = A[2];// / num;
+	Alight[0] = A[0] / num;
+	Alight[1] = A[1] / num;
+	Alight[2] = A[2] / num;
+
 	//cout << num << " " << pq.size() << endl;
 }
 

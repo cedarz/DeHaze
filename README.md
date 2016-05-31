@@ -17,6 +17,9 @@
 - 评估大气光/atmospheric light 【done】
 - 去雾操作 【done】
 
+##测试
+
+- [测试图片](http://kaiminghe.com/cvpr09/results.html)
 
 ##git->github
 

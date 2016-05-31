@@ -173,7 +173,7 @@ void DeHaze::getAtmosphericLight(){
 	Alight[0] = A[0] / num;
 	Alight[1] = A[1] / num;
 	Alight[2] = A[2] / num;
-
+	cout << int(Alight[0]) << " " << int(Alight[1]) << " " << int(Alight[2]) << endl;
 	//cout << num << " " << pq.size() << endl;
 }
 
